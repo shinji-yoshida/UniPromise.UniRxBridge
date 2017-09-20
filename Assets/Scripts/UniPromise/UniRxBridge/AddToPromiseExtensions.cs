@@ -5,9 +5,15 @@ using System;
 
 namespace UniPromise.UniRxBridge {
 	public static class AddToPromiseExtensions {
+		public static Promise<T> AddPromiseTo<T>(this Promise<T> promise, ICollection<IDisposable> container) {
+			return AddTo (promise, container);
+		}
+
 		public static Promise<T> AddTo<T>(this Promise<T> promise, ICollection<IDisposable> container) {
-			if(promise.IsPending)
-				UniRx.DisposableExtensions.AddTo(promise, container);
+			if (promise.IsPending) {
+				UniRx.DisposableExtensions.AddTo (promise, container);
+				promise.Finally (() => container.Remove (promise));
+			}
 
 			return promise;
 		}
