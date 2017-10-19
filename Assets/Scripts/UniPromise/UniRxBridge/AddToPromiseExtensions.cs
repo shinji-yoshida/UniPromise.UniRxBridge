@@ -5,11 +5,11 @@ using System;
 
 namespace UniPromise.UniRxBridge {
 	public static class AddToPromiseExtensions {
-		public static Promise<T> AddPromiseTo<T>(this Promise<T> promise, ICollection<IDisposable> container) {
+		public static Promise<T> AddPromiseTo<T>(this Promise<T> promise, ICollection<IDisposable> container) where T : class {
 			return AddTo (promise, container);
 		}
 
-		public static Promise<T> AddTo<T>(this Promise<T> promise, ICollection<IDisposable> container) {
+		public static Promise<T> AddTo<T>(this Promise<T> promise, ICollection<IDisposable> container) where T : class {
 			if (promise.IsPending) {
 				UniRx.DisposableExtensions.AddTo (promise, container);
 				promise.Finally (() => container.Remove (promise));
@@ -18,14 +18,14 @@ namespace UniPromise.UniRxBridge {
 			return promise;
 		}
 
-		public static Promise<T> AddTo<T>(this Promise<T> promise, GameObject gameObject) {
+		public static Promise<T> AddTo<T>(this Promise<T> promise, GameObject gameObject) where T : class {
 			if(promise.IsPending)
 				UniRx.DisposableExtensions.AddTo(promise, gameObject);
 
 			return promise;
 		}
 		
-		public static Promise<T> AddTo<T>(this Promise<T> promise, Component component) {
+		public static Promise<T> AddTo<T>(this Promise<T> promise, Component component) where T : class {
 			if(promise.IsPending)
 				UniRx.DisposableExtensions.AddTo(promise, component);
 

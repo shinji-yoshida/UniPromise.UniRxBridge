@@ -3,12 +3,12 @@ using System;
 
 namespace UniPromise.UniRxBridge {
 	public static class UnitPromise {
-		public static Promise<Unit> Resolved = Promises.Resolved<Unit>(Unit.Default);
+		public static Promise<CUnit> Resolved = Promises.Resolved<CUnit>(CUnit.Default);
 
-		public static Promise<Unit> Rejected(Exception e) {
-			return Promises.Rejected<Unit>(e);
+		public static Promise<CUnit> Rejected(Exception e) {
+			return Promises.Rejected<CUnit>(e);
 		}
 
-		public static Promise<Unit> Disposed = Promises.Disposed<Unit>();
+		public static Promise<CUnit> Disposed = Promises.Disposed<CUnit>();
 	}
 }
