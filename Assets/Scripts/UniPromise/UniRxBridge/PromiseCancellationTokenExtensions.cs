@@ -1,5 +1,6 @@
 ﻿using UniRx;
 using System;
+using System.Threading;
 
 namespace UniPromise.UniRxBridge {
 	public static class PromiseCancellationTokenExtensions {
